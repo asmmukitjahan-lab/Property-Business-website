@@ -1,8 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import { properties as data } from "../../data/properties";
-
-const PropertyContext = createContext();
-export const useProperties = () => useContext(PropertyContext);
+import { PropertyContext } from "./contexts";
 
 export function PropertyProvider({ children }) {
   const [properties] = useState(data);

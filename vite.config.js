@@ -1,8 +1,18 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-})
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("framer-motion")) return "motion";
+          if (id.includes("gsap")) return "gsap";
+          if (id.includes("react-router")) return "router";
+        },
+      },
+    },
+  },
+});
